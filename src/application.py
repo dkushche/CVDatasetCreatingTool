@@ -1,5 +1,6 @@
 from screeninfo import get_monitors
 from config import *
+import platform
 import copy
 import time
 import cv2
@@ -82,7 +83,11 @@ def save_frame(app_data, frame):
     bg_id = int(app_data["current_photo"] / PHOTO_PER_BACKGROUND)
     shot_id = app_data["current_photo"] % (PHOTO_PER_BACKGROUND)
     background = BACKGROUND_TYPES[bg_id]
-    path = f"{SURNAME}/{background}/{SURNAME}_{bg_id + 1}_{shot_id + 1}.bmp"
+    if platform.system() == "Windows":
+        path = f"{SURNAME}\{background}\{SURNAME}_{bg_id + 1}_{shot_id + 1}.bmp"
+    else:
+        path = f"{SURNAME}/{background}/{SURNAME}_{bg_id + 1}_{shot_id + 1}.bmp"
+    print(path)
     cv2.imwrite(path, frame)
     app_data["current_photo"] += 1
 
@@ -123,9 +128,18 @@ def deinit_cam():
 
 
 def prepare_storage():
-    os.system(f"rm -rf {SURNAME}")
+    if platform.system() == "Windows":
+        del_cmd = "RMDIR /S /Q"
+        create_cmd = "MKDIR"
+    else:
+        del_cmd = "rm -rf"
+        create_cmd = "mkdir -p"
+    os.system(f"{del_cmd} {SURNAME}")
     for dir_name in BACKGROUND_TYPES:
-        os.system(f"mkdir -p {SURNAME}/{dir_name}")
+        if platform.system() == "Windows":
+            os.system(f"{create_cmd} {SURNAME}\{dir_name}")
+        else:
+            os.system(f"{create_cmd} {SURNAME}/{dir_name}")
 
 
 if __name__ == "__main__":
