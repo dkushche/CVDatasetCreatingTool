@@ -1,0 +1,9 @@
+ImageHash==4.2.0
+numpy==1.19.4
+opencv-python==4.4.0.46
+Pillow==8.0.1
+python-constraint==1.4.0
+PyWavelets==1.1.1
+scipy==1.5.4
+screeninfo==0.6.6
+six==1.15.0
