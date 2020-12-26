@@ -1,12 +1,19 @@
 # CVDatasetCreatingTool
 # Linux setup
+Open terminal and run from project directory.
 ```
-./install
-./webcam
+./install.sh
+./webcam.sh
 ```
 # Windows setup
+If you don't have [Python](https://www.python.org/downloads/) install it. Instalation for all users is optional but It's __important__ to add it to __PATH__ . I advise choosing "Install Now" if you're not an experienced user.
+
+If you have python, open command line and run from project directory.
 ```
-TBD
+windows_install.bat
+webcam_env\Scripts\activate.bat
+python src\application.py
+webcam_env\Scripts\deactivate.bat (_optional_)
 ```
 
 # Info
